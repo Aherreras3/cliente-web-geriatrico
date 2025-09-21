@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+
+body {
+  background-color: #bcc2c9;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Contenedor principal */
+.slider-container {
+  position: relative;
+  overflow: hidden;    /* recorta overlay */
+  width: min(1100px, 100% - 2rem);
+  max-width: 100%;
+  min-height: 620px;   /* más alto para formularios largos */
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+              0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+/* capa de formularios */
+.form-container {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  transition: all 0.6s ease-in-out;
+}
+
+/* Paneles */
+.sign-in-container,
+.sign-up-container {
+  position: absolute;
+  left: 0;
+  height: 100%;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;   /* el interior puede medir 100% */
+  padding: 0;             /* padding va en .panel-inner */
+  box-sizing: border-box;
+  overflow-y: auto;       /* scroll vertical interno */
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.sign-in-container { z-index: 2; }
+.sign-up-container { opacity: 0; z-index: 1; background: #fff; }
+
+/* Contenido con padding dentro de cada panel */
+.panel-inner {
+  height: 100%;
+  width: 100%;
+  padding: 28px;
+  box-sizing: border-box;
+}
+
+/* >>> BAJAR un poco solo el LOGIN <<< */
+.sign-in-container .panel-inner {
+  padding-top: clamp(40px, 7vh, 80px); /* mueve el card un poco hacia abajo */
+}
+
+/* Transiciones */
+.slider-container.right-panel-active .sign-in-container {
+  transform: translateX(100%);
+}
+.slider-container.right-panel-active .sign-up-container {
+  transform: translateX(100%);
+  opacity: 1;
+  z-index: 5;
+}
+
+/* Overlay */
+.overlay-container {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  transition: transform 0.6s ease-in-out;
+  z-index: 100;
+}
+.slider-container.right-panel-active .overlay-container {
+  transform: translateX(-100%);
+}
+
+.overlay {
+  background: url("/img/LOGINREGISTERIMAGE.png") center/cover no-repeat;
+  color: #fff;
+  position: relative;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  transform: translateX(0);
+  transition: transform 0.6s ease-in-out;
+  display: flex;
+}
+.slider-container.right-panel-active .overlay {
+  transform: translateX(50%);
+}
+
+/* Panel de texto dentro del overlay */
+.overlay-panel {
+  width: 50%;
+  padding: 0 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.45);
+}
+.overlay-panel h1 {
+  font-size: clamp(22px, 2.2vw, 28px);
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+.overlay-panel p {
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 300;
+  max-width: 380px;
+}
+
+/* Botón ghost */
+.ghost {
+  margin-top: 20px;
+  background: transparent;
+  border: 2px solid white;
+  padding: 10px 25px;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.ghost:hover { background-color: white; color: #002857; }
+
+/* Ajuste por pantallas bajas */
+@media (max-height: 720px) {
+  .slider-container { min-height: 560px; }
+}

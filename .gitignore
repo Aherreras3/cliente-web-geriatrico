@@ -1,0 +1,19 @@
+# dependencias
+node_modules/
+# next
+.next/
+out/
+# entornos
+.env
+.env.local
+.env.*.local
+# vercel
+.vercel/
+# logs y temporales
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+*.log
+# editor
+.vscode/
+.DS_Store
